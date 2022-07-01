@@ -3,16 +3,15 @@
 #include <vector>
 using namespace std;
 pair<int, int> closestSum(vector<int> arr, int x) {
-	int n = arr.size();
-	pair<int, int> closest;
-	double minn = INFINITY;
-	for (int i = 0; i < n-1; ++i)
-		for (int j = i+1; j < n; ++j)
-			if (abs(x - (arr[i] + arr[j])) < minn) {
-				minn = abs(x - (arr[i] + arr[j]));
-				closest = { arr[i], arr[j] };
-			}
-	return closest;
+	int l = 0, r = 0, n = arr.size();
+	int left = 0, right = n - 1, minn = INT_MAX;
+	while (left < right) {
+		if (abs(x - (arr[left] + arr[right])) < minn)
+			l = left, r = right, minn = abs(x - (arr[left] + arr[right]));
+		if (arr[left] + arr[right] > x) right--;
+		else left++;
+	}
+	return { arr[l], arr[r] };
 }
 
 int main()
