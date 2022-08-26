@@ -5,9 +5,9 @@ using namespace std;
 
 vector<int> matrixSearch(int n, int m, int arr[][4], int value) {
 	//matrix is sorted both column wise & row wise
-	//stairs search O(N + M)
+	//staircase search O(N + M)
 	int x = 0, y = m - 1;
-	while (x > -1 && y > -1) {
+	while (x < n && y > -1) {
 		if (arr[x][y] == value) return {x, y};
 		if (arr[x][y] > value) y--;
 		else x++;
